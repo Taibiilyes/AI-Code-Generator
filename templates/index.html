@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Code-Generator — بيئة توليد وتطبيق الأكواد بالذكاء الاصطناعي</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- FontAwesome for crisp icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CodeMirror for rich code editing -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+</head>
+<body class="dark-theme">
+    <!-- Main Top Navbar -->
+    <header class="app-header">
+        <div class="header-left">
+            <div class="brand">
+                <i class="fa-solid fa-brain-circuit brand-icon"></i>
+                <div class="brand-text">
+                    <span class="brand-title">AI-Code-Generator</span>
+                    <span class="brand-tag">Python & Java AI Studio</span>
+                </div>
+            </div>
+            
+            <div class="lang-selector-group">
+                <button class="lang-btn active" data-lang="python" id="btn-lang-python">
+                    <i class="fa-brands fa-python"></i> Python
+                </button>
+                <button class="lang-btn" data-lang="java" id="btn-lang-java">
+                    <i class="fa-brands fa-java"></i> Java
+                </button>
+            </div>
+        </div>
+
+        <div class="header-center">
+            <div class="mode-select-wrapper">
+                <i class="fa-solid fa-wand-magic-sparkles mode-icon"></i>
+                <select id="mode-select" class="mode-select">
+                    <option value="generate">✨ توليد كود جديد (Generate)</option>
+                    <option value="refactor">⚡ إعادة هيكلة وتحسين (Refactor)</option>
+                    <option value="fix">🛠️ فحص وإصلاح الأخطاء (Fix Bugs)</option>
+                    <option value="explain">📖 شرح وتحليل الكود (Explain)</option>
+                    <option value="tests">🧪 توليد اختبارات الوحدة (Unit Tests)</option>
+                    <option value="convert">🔄 تحويل بين Python و Java</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="btn btn-primary" id="btn-run-code" title="تشغيل الكود الحالي (Ctrl+Enter)">
+                <i class="fa-solid fa-play"></i> <span>تشغيل الكود</span>
+            </button>
+            <button class="btn btn-secondary" id="btn-save-file" title="حفظ الملف">
+                <i class="fa-solid fa-floppy-disk"></i> <span>حفظ</span>
+            </button>
+            <button class="btn btn-icon" id="btn-templates" title="مكتبة النماذج والقوالب">
+                <i class="fa-solid fa-folder-open"></i>
+            </button>
+            <button class="btn btn-icon" id="btn-download-zip" title="تنزيل المشروع كاملاً (ZIP)">
+                <i class="fa-solid fa-file-zipper"></i>
+            </button>
+            <button class="btn btn-icon" id="btn-history" title="سجل التوليد">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+            </button>
+            <button class="btn btn-icon" id="btn-settings" title="الإعدادات ومفتاح API">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+            <button class="btn btn-icon" id="btn-toggle-theme" title="تبديل المظهر (داكن/فاتح)">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="btn btn-icon" id="btn-toggle-direction" title="Switch Language / RTL - LTR">
+                <i class="fa-solid fa-language"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <div class="main-layout">
+        <!-- Sidebar: File Explorer -->
+        <aside class="sidebar-files">
+            <div class="sidebar-header">
+                <span class="sidebar-title"><i class="fa-solid fa-folder-tree"></i> ملفات المشروع</span>
+                <div class="sidebar-actions">
+                    <button class="btn-mini" id="btn-new-file" title="ملف جديد"><i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-mini" id="btn-refresh-files" title="تحديث"><i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+            </div>
+            <div class="file-list" id="file-tree-container">
+                <!-- Injected via JavaScript -->
+            </div>
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="dot online"></span> <span id="server-status-label">الخادم متصل</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center: Code Editor Area -->
+        <main class="editor-section">
+            <div class="editor-tabs-bar">
+                <div class="active-tab" id="current-file-tab">
+                    <i class="fa-brands fa-python file-icon" id="tab-file-icon"></i>
+                    <span id="current-file-name">main.py</span>
+                    <span class="unsaved-dot" id="unsaved-indicator" style="display:none;">●</span>
+                </div>
+                <div class="editor-view-toggles">
+                    <button class="view-btn active" id="btn-view-editor" title="عرض المحرر">
+                        <i class="fa-solid fa-code"></i> المحرر
+                    </button>
+                    <button class="view-btn" id="btn-view-diff" title="عرض الفروقات (Diff)">
+                        <i class="fa-solid fa-code-compare"></i> مقارنة التغييرات
+                    </button>
+                </div>
+            </div>
+
+            <!-- Standard CodeMirror Editor -->
+            <div class="editor-container" id="editor-box">
+                <textarea id="code-editor-textarea"></textarea>
+            </div>
+
+            <!-- Side-by-Side / Unified Diff View (Hidden by default) -->
+            <div class="diff-container" id="diff-box" style="display: none;">
+                <div class="diff-header-bar">
+                    <span class="diff-title"><i class="fa-solid fa-code-merge"></i> مقارنة كود الذكاء الاصطناعي مع الكود الحالي</span>
+                    <div class="diff-actions">
+                        <button class="btn btn-success btn-sm" id="btn-apply-diff">
+                            <i class="fa-solid fa-check"></i> تطبيق الكود المُولد
+                        </button>
+                        <button class="btn btn-danger btn-sm" id="btn-reject-diff">
+                            <i class="fa-solid fa-xmark"></i> رفض
+                        </button>
+                    </div>
+                </div>
+                <div class="diff-pre-wrapper">
+                    <pre id="diff-content" class="diff-pre"></pre>
+                </div>
+            </div>
+
+            <!-- Bottom Console / Terminal Output -->
+            <div class="console-drawer" id="console-drawer">
+                <div class="console-header">
+                    <div class="console-title">
+                        <i class="fa-solid fa-terminal"></i> مخرجات التنفيذ (Terminal)
+                        <span id="execution-badge" class="badge-status"></span>
+                        <span id="execution-timer" class="execution-timer"></span>
+                    </div>
+                    <div class="console-actions">
+                        <button class="btn-mini" id="btn-clear-console" title="مسح المخرجات"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn-mini" id="btn-copy-console" title="نسخ المخرجات"><i class="fa-solid fa-copy"></i></button>
+                        <button class="btn-mini" id="btn-toggle-console" title="تصغير/تكبير"><i class="fa-solid fa-chevron-down"></i></button>
+                    </div>
+                </div>
+                <div class="console-body" id="console-output">
+                    <div class="console-placeholder">جاهز للتشغيل... اضغط على زر "تشغيل الكود" أو استخدم الاختصار Ctrl+Enter.</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Side: AI Assistant Panel -->
+        <aside class="sidebar-ai">
+            <div class="ai-header">
+                <div class="ai-header-title">
+                    <i class="fa-solid fa-wand-magic-sparkles ai-sparkle"></i>
+                    <span>مساعد الذكاء الاصطناعي</span>
+                </div>
+                <span class="ai-badge" id="ai-active-model">Built-in AI</span>
+            </div>
+
+            <div class="ai-prompt-area">
+                <label for="ai-prompt-input" class="prompt-label">اكتب ما تريد برمجته أو تعديله:</label>
+                <textarea id="ai-prompt-input" class="prompt-textarea" placeholder="مثال: أنشئ نظام إدارة مكتبة، أو خادم API لمعالجة الطلبات، أو رتب مصفوفة باستخدام QuickSort..."></textarea>
+                
+                <div class="prompt-quick-tags">
+                    <span class="qtag" data-text="REST API Server">🌐 REST API</span>
+                    <span class="qtag" data-text="Data Structures (BST)">🌳 BST Tree</span>
+                    <span class="qtag" data-text="Banking System OOP">🏦 Banking System</span>
+                    <span class="qtag" data-text="Multithreaded Executor">⚡ Concurrency</span>
+                </div>
+
+                <div class="ai-actions-row">
+                    <button class="btn btn-ai-generate" id="btn-trigger-ai">
+                        <i class="fa-solid fa-bolt"></i> <span>توليد وتطبيق الكود</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- AI Explanation / Insights Area -->
+            <div class="ai-response-box" id="ai-explanation-box">
+                <div class="ai-response-header">
+                    <i class="fa-solid fa-circle-info"></i> شرح وتفاصيل العملية
+                </div>
+                <div class="ai-response-content" id="ai-explanation-text">
+                    اكتب طلباً ثم اضغط على زر "توليد وتطبيق الكود" لعرض الشرح والتحليل هنا تلقائياً.
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modals -->
+    <!-- 1. Templates Modal -->
+    <div class="modal" id="modal-templates">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-folder-open"></i> مكتبة النماذج والقوالب الجاهزة</h3>
+                <button class="modal-close" data-close="modal-templates">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="templates-grid" id="templates-list-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Settings Modal -->
+    <div class="modal" id="modal-settings">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-gear"></i> إعدادات الذكاء الاصطناعي والبيئة</h3>
+                <button class="modal-close" data-close="modal-settings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>مزود الذكاء الاصطناعي:</label>
+                    <select id="setting-provider" class="form-control">
+                        <option value="auto">الوضع التلقائي (Built-in Smart Engine)</option>
+                        <option value="openai">OpenAI (ChatGPT / GPT-4o)</option>
+                        <option value="anthropic">Anthropic (Claude 3.5)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>مفتاح API الخاص بك (اختياري - للاستخدام الشخصي):</label>
+                    <input type="password" id="setting-api-key" class="form-control" placeholder="sk-...">
+                </div>
+                <div class="form-group">
+                    <label>النموذج المفضل (Model):</label>
+                    <input type="text" id="setting-model" class="form-control" placeholder="gpt-4o-mini أو claude-3-5-sonnet">
+                </div>
+                <div class="form-group">
+                    <label>المهلة القصوى لتنفيذ الكود (بالثواني):</label>
+                    <input type="number" id="setting-timeout" class="form-control" value="15" min="3" max="60">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="btn-save-settings">حفظ الإعدادات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. History Drawer / Modal -->
+    <div class="modal" id="modal-history">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> سجل التوليد والطلبات السابقة</h3>
+                <button class="modal-close" data-close="modal-history">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="history-actions-bar">
+                    <button class="btn btn-danger btn-sm" id="btn-clear-history-db"><i class="fa-solid fa-trash"></i> مسح السجل</button>
+                </div>
+                <div class="history-list" id="history-items-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JS Libraries (CodeMirror & Code Highlighting) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ai-code-generator:
+    build: .
+    container_name: ai_code_generator_app
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - HOST=0.0.0.0
+      - EXECUTION_TIMEOUT=15
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      - ./workspace:/app/workspace
+      - ./ai_code_generator.db:/app/ai_code_generator.db
+    restart: unless-stopped
