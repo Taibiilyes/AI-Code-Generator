@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>جسمي من الداخل — بطاقة تعليمية قابلة للطباعة</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">🦴</span>
+    <div>
+      <h1>جسمي من الداخل</h1>
+      <p>بطاقة تعليمية للأطفال — من الخارج ومن الداخل</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn ghost" id="btn-flip-demo">جرّب قلب البطاقة</button>
+    <button class="btn primary" id="btn-print">اطبع / حفظ PDF</button>
+  </div>
+</header>
+
+<main>
+  <!-- ============ تجربة تفاعلية ============ -->
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">جرّبها الآن</span>
+      <h2>اضغط البطاقة لتقلبها</h2>
+      <p>
+        الوجه الأول يُظهر <b>وليد</b> من الخارج، وعند قلبها يظهر
+        <b>هيكله العظمي</b> في المكان نفسه — تمامًا كالورقة المطبوعة.
+      </p>
+      <ul class="checks">
+        <li>نفس المقاس ونفس الوضعية في الوجهين</li>
+        <li>الهيكل داخل «ظلّ» الملابس، فيتعلّم الطفل الموضع الصحيح لكل عظم</li>
+        <li>نصوص عربية مشكولة بخط Baloo Bhaijaan 2</li>
+      </ul>
+    </div>
+
+    <div class="flip-wrap">
+      <div class="flip" id="flip" role="button" tabindex="0" aria-label="اقلب البطاقة">
+        <div class="flip-inner">
+          <div class="flip-face front" data-svg="assets/boy.svg"></div>
+          <div class="flip-face back" data-svg="assets/skeleton.svg"></div>
+        </div>
+      </div>
+      <p class="hint" id="flip-hint">الوجه الأول: من الخارج</p>
+    </div>
+  </section>
+
+  <!-- ============ الصفحات للطباعة ============ -->
+  <section class="sheets" id="sheets">
+    <article class="sheet-card">
+      <div class="sheet-head">
+        <div>
+          <h3>صفحة ١ — البطاقة</h3>
+          <p>وجهان على ورقة A4 واحدة</p>
+        </div>
+        <a class="btn ghost sm" href="assets/card-a4.png" download>تنزيل PNG</a>
+      </div>
+      <div class="paper" data-svg="card-a4.svg"></div>
+    </article>
+
+    <article class="sheet-card">
+      <div class="sheet-head">
+        <div>
+          <h3>صفحة ٢ — ورقة نشاط</h3>
+          <p>تسمية العظام + بنك كلمات + «هل تعلم؟»</p>
+        </div>
+        <a class="btn ghost sm" href="assets/activity-a4.png" download>تنزيل PNG</a>
+      </div>
+      <div class="paper" data-svg="activity-a4.svg"></div>
+    </article>
+  </section>
+
+  <section class="howto">
+    <h3>طريقة الطباعة</h3>
+    <ol>
+      <li><b>اطبع</b> الصفحة الأولى على ورق A4 سميك (160–250 جرامًا) وبمقاس 100%.</li>
+      <li><b>اقطع</b> الصفحة من الخط المنقّط في المنتصف (رمز المقص) لتصبح بطاقتين.</li>
+      <li><b>الصق</b> الظهرين معًا (وليد + الهيكل) بحيث يتطابق الرسمان تمامًا.</li>
+      <li>أو اطوِ الورقة من المنتصف مباشرة إن لم ترغب في القص.</li>
+    </ol>
+  </section>
+</main>
+
+<footer>
+  <p>الرسوم منفّذة بـ SVG (متجهية، تُطبع بجودة عالية). الخطوط: Baloo Bhaijaan 2 و Cairo — رخصة SIL OFL.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
