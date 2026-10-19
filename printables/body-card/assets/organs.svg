@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" width="400" height="800">
+  <g id="body" fill="#F6DCCD">
+
+
+  <!-- ================= legs ================= -->
+  <g id="legs">
+    <path d="M134 518 h58 l-2 136 q0 14 -27 14 -27 0 -27 -14 z" fill="#F6DCCD"/>
+    <path d="M208 518 h58 l-2 136 q0 14 -27 14 -27 0 -27 -14 z" fill="#F6DCCD"/>
+    
+    <ellipse cx="160" cy="610" rx="12" ry="8" fill="#F6DCCD" opacity="1"/>
+    <ellipse cx="240" cy="610" rx="12" ry="8" fill="#F6DCCD" opacity="1"/>
+  </g>
+
+  <!-- ================= shoes ================= -->
+  <g id="shoes">
+    <g transform="translate(400,0) scale(-1,1)">
+      <g transform="translate(22.8,0) scale(0.86,1)">
+        <path d="M132 666 q0 -16 17 -16 h30 q17 0 18 16 l5 36 q1 12 -12 12 h-50 q-13 0 -12 -12 z" fill="#F6DCCD" stroke="#F6DCCD" stroke-width="2"/>
+        <path d="M120 698 q0 -10 12 -10 h76 q12 0 12 11 v11 q0 11 -12 11 h-76 q-12 0 -12 -11 z" fill="#F6DCCD" stroke="#F6DCCD" stroke-width="2"/>
+        <path d="M139 672 q22 -9 55 0" stroke="#F6DCCD" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M137 682 q24 -9 59 0" stroke="#F6DCCD" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="158" cy="708" r="3.6" fill="#F6DCCD" opacity="1"/>
+        <circle cx="181" cy="708" r="3.6" fill="#F6DCCD" opacity="1"/>
+      </g>
+    </g>
+    <g transform="translate(22.8,0) scale(0.86,1)">
+      <path d="M132 666 q0 -16 17 -16 h30 q17 0 18 16 l5 36 q1 12 -12 12 h-50 q-13 0 -12 -12 z" fill="#F6DCCD" stroke="#F6DCCD" stroke-width="2"/>
+      <path d="M120 698 q0 -10 12 -10 h76 q12 0 12 11 v11 q0 11 -12 11 h-76 q-12 0 -12 -11 z" fill="#F6DCCD" stroke="#F6DCCD" stroke-width="2"/>
+      <path d="M139 672 q22 -9 55 0" stroke="#F6DCCD" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M137 682 q24 -9 59 0" stroke="#F6DCCD" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="158" cy="708" r="3.6" fill="#F6DCCD" opacity="1"/>
+      <circle cx="181" cy="708" r="3.6" fill="#F6DCCD" opacity="1"/>
+    </g>
+  </g>
+
+  <!-- ================= shorts ================= -->
+  <g id="shorts">
+    <path d="M127 428 h146 q9 0 9 10 v100 q0 10 -10 10 h-56 q-7 0 -8 -7 l-8 -49 -8 49 q-1 7 -8 7 h-56 q-10 0 -10 -10 v-100 q0 -10 9 -10 z" fill="#F6DCCD"/>
+    <path d="M200 470 v62" stroke="#F6DCCD" stroke-width="4" opacity="1" stroke-linecap="round"/>
+    <path d="M134 452 h132" stroke="#F6DCCD" stroke-width="4" opacity="1" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= arms ================= -->
+  <g id="arms">
+    <!-- arm -->
+    <path d="M152 330 C131 372 120 428 118 492" stroke="#F6DCCD" stroke-width="35" stroke-linecap="round" fill="none"/>
+    <path d="M248 330 C269 372 280 428 282 492" stroke="#F6DCCD" stroke-width="35" stroke-linecap="round" fill="none"/>
+    <!-- hands -->
+    <path d="M118 486 q-18 2 -20 22 -2 22 10 32 12 9 24 1 10 -8 6 -24 -4 -20 -4 -31 z" fill="#F6DCCD"/>
+    <path d="M282 486 q18 2 20 22 2 22 -10 32 -12 9 -24 1 -10 -8 -6 -24 4 -20 4 -31 z" fill="#F6DCCD"/>
+    <path d="M108 508 q2 20 6 28" stroke="#F6DCCD" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="1"/>
+    <path d="M118 512 q2 17 4 24" stroke="#F6DCCD" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="1"/>
+    <path d="M292 508 q-2 20 -6 28" stroke="#F6DCCD" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="1"/>
+    <path d="M282 512 q-2 17 -4 24" stroke="#F6DCCD" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="1"/>
+  </g>
+
+  <!-- ================= neck ================= -->
+  <path d="M177 274 h46 v44 q0 13 -23 13 -23 0 -23 -13 z" fill="#F6DCCD"/>
+  <path d="M177 274 h46 v18 q-23 11 -46 0 z" fill="#F6DCCD" opacity="1"/>
+
+  <!-- ================= t-shirt ================= -->
+  <g id="shirt">
+    <!-- sleeves -->
+    <path d="M152 318 q-24 10 -38 32 -14 22 -18 44 -2 12 8 14 l20 4 q8 2 12 -2 6 -6 6 -16 4 -24 12 -44 7 -18 16 -30 z" fill="#F6DCCD"/>
+    <path d="M248 318 q24 10 38 32 14 22 18 44 2 12 -8 14 l-20 4 q-8 2 -12 -2 -6 -6 -6 -16 -4 -24 -12 -44 -7 -18 -16 -30 z" fill="#F6DCCD"/>
+    <path d="M102 394 q26 6 50 -2" stroke="#F6DCCD" stroke-width="6" fill="none" opacity="1" stroke-linecap="round"/>
+    <path d="M298 394 q-26 6 -50 -2" stroke="#F6DCCD" stroke-width="6" fill="none" opacity="1" stroke-linecap="round"/>
+
+    <!-- torso -->
+    <path d="M172 306 q28 17 56 0 l14 4 q22 7 27 28 5 22 4 56 0 34 -2 48 -2 12 -14 12 h-114 q-12 0 -14 -12 -2 -14 -2 -48 -1 -34 4 -56 5 -21 27 -28 z" fill="#F6DCCD"/>
+    <!-- soft folds -->
+    <path d="M140 420 q18 8 34 2" stroke="#F6DCCD" stroke-width="5" fill="none" opacity="1" stroke-linecap="round"/>
+    <path d="M226 422 q18 6 34 -2" stroke="#F6DCCD" stroke-width="5" fill="none" opacity="1" stroke-linecap="round"/>
+    <!-- collar -->
+    <path d="M172 306 q28 22 56 0 -5 16 -14 20 -14 7 -28 0 -9 -4 -14 -20 z" fill="#F6DCCD"/>
+    <path d="M180 312 q20 14 40 0" stroke="#F6DCCD" stroke-width="3" fill="none" opacity="1" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= head ================= -->
+  <g id="head">
+    <!-- ears -->
+    <ellipse cx="123" cy="224" rx="14" ry="17" fill="#F6DCCD"/>
+    <ellipse cx="277" cy="224" rx="14" ry="17" fill="#F6DCCD"/>
+    <path d="M120 220 q6 5 0 11" stroke="#F6DCCD" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M280 220 q-6 5 0 11" stroke="#F6DCCD" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- face -->
+    <path d="M200 126
+             C 158 126 126 156 124 200
+             C 122 244 132 278 156 294
+             C 170 304 184 308 200 308
+             C 216 308 230 304 244 294
+             C 268 278 278 244 276 200
+             C 274 156 242 126 200 126 Z" fill="#F6DCCD"/>
+
+    <!-- blush -->
+    <ellipse cx="152" cy="256" rx="15" ry="8.5" fill="#F6DCCD" opacity="1"/>
+    <ellipse cx="248" cy="256" rx="15" ry="8.5" fill="#F6DCCD" opacity="1"/>
+
+  </g>
+  </g>
+
+  <!-- ================= ORGANS ================= -->
+  <g id="organs" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- ===== BRAIN ===== -->
+    <g id="brain">
+      <path d="M200 128
+               C 170 128 150 146 149 172
+               C 148 192 156 208 170 215
+               C 180 220 190 222 200 222
+               C 210 222 220 220 230 215
+               C 244 208 252 192 251 172
+               C 250 146 230 128 200 128 Z"
+            fill="#FFB7C8" stroke="#E2879F" stroke-width="2.4"/>
+      <g fill="none" stroke="#E2879F" stroke-width="2.2" opacity="0.9">
+        <path d="M200 130 C 194 146 200 156 195 168 C 191 178 183 182 175 184"/>
+        <path d="M200 130 C 208 144 205 156 212 166 C 218 175 227 178 236 178"/>
+        <path d="M166 150 C 176 155 180 165 176 175 C 173 184 179 194 190 196"/>
+        <path d="M234 150 C 224 155 220 165 224 175 C 227 184 221 194 210 196"/>
+        <path d="M154 174 C 163 179 167 189 165 199"/>
+        <path d="M246 174 C 237 179 233 189 235 199"/>
+        <path d="M184 206 C 192 212 208 212 216 206"/>
+      </g>
+      <path d="M193 218 q7 16 14 0 z" fill="#F092AC" stroke="#E2879F" stroke-width="2"/>
+    </g>
+
+    <!-- ===== AIRWAY ===== -->
+    <g id="airway">
+      <rect x="195.5" y="238" width="9" height="68" rx="4.5" fill="#E2EBF7" stroke="#A8BDD9" stroke-width="2"/>
+      <g stroke="#A8BDD9" stroke-width="1.6" opacity="0.75">
+        <path d="M195.5 250 h9 M195.5 262 h9 M195.5 274 h9 M195.5 286 h9 M195.5 298 h9"/>
+      </g>
+      <path d="M200 304 l-24 20 M200 304 l24 20" fill="none" stroke="#A8BDD9" stroke-width="8"/>
+    </g>
+
+    <!-- ===== LUNGS ===== -->
+    <g id="lungs">
+      <path d="M193 322
+               C 176 314 158 324 152 346
+               C 146 368 148 392 156 405
+               C 164 417 181 416 189 403
+               C 194 395 194 382 193 368 Z"
+            fill="#FF9DB1" stroke="#E16F8A" stroke-width="2.6"/>
+      <path d="M207 322
+               C 224 314 242 324 248 346
+               C 254 368 252 392 244 405
+               C 236 417 219 416 211 403
+               C 206 395 206 382 207 368 Z"
+            fill="#FF9DB1" stroke="#E16F8A" stroke-width="2.6"/>
+      <g fill="none" stroke="#E16F8A" stroke-width="1.9" opacity="0.7">
+        <path d="M173 336 C 166 358 168 384 176 399"/>
+        <path d="M227 336 C 234 358 232 384 224 399"/>
+      </g>
+      <g fill="none" stroke="#FFFFFF" stroke-width="3.2" opacity="0.5">
+        <path d="M160 344 q11 -9 24 -4"/>
+        <path d="M240 344 q-11 -9 -24 -4"/>
+      </g>
+    </g>
+
+    <!-- ===== HEART ===== -->
+    <g id="heart">
+      <path d="M216 336
+               C 228 331 240 340 241 353
+               C 242 368 230 381 217 391
+               C 213 394 209 394 206 390
+               C 197 379 192 367 194 355
+               C 196 341 206 333 216 336 Z"
+            fill="#E8455F" stroke="#BE2C44" stroke-width="2.6"/>
+      <path d="M216 336 q-1 -13 9 -17 q10 -4 11 6" fill="none" stroke="#BE2C44" stroke-width="7.5"/>
+      <path d="M216 336 q-1 -13 9 -17" fill="none" stroke="#F4798D" stroke-width="2.6" opacity="0.85"/>
+      <g fill="none" stroke="#F4798D" stroke-width="2.2" opacity="0.85">
+        <path d="M203 357 q9 13 6 25"/>
+        <path d="M228 355 q7 11 2 23"/>
+      </g>
+    </g>
+
+    <!-- ===== LIVER ===== -->
+    <g id="liver">
+      <path d="M148 402
+               C 156 392 180 387 198 392
+               C 207 394 211 402 205 411
+               C 197 423 172 430 157 424
+               C 147 420 143 410 148 402 Z"
+            fill="#A75F3D" stroke="#7C4028" stroke-width="2.4"/>
+      <path d="M169 394 q13 10 10 22" fill="none" stroke="#7C4028" stroke-width="2" opacity="0.65"/>
+      <path d="M154 404 q14 -7 32 -3" fill="none" stroke="#C98C6C" stroke-width="3" opacity="0.65"/>
+    </g>
+
+    <!-- ===== STOMACH ===== -->
+    <g id="stomach">
+      <path d="M224 392
+               C 240 387 251 398 252 413
+               C 253 430 241 442 228 440
+               C 216 438 210 427 212 414
+               C 214 403 217 394 224 392 Z"
+            fill="#F2A35F" stroke="#C77A38" stroke-width="2.4"/>
+      <path d="M224 392 q-4 -13 3 -21" fill="none" stroke="#C77A38" stroke-width="7"/>
+      <path d="M218 406 q13 7 7 22" fill="none" stroke="#F9C79D" stroke-width="3" opacity="0.8"/>
+    </g>
+
+    <!-- ===== KIDNEYS ===== -->
+    <g id="kidneys" fill="#B16246" stroke="#8A4526" stroke-width="2.2">
+      <path d="M172 418 C 162 417 155 426 156 436 C 157 446 166 451 173 445 C 179 440 179 424 176 420 Z"/>
+      <path d="M228 418 C 238 417 245 426 244 436 C 243 446 234 451 227 445 C 221 440 221 424 224 420 Z"/>
+    </g>
+
+    <!-- ===== INTESTINES ===== -->
+    <g id="intestines">
+      <path d="M200 440
+               C 180 440 170 448 172 458
+               C 174 468 188 470 198 467
+               C 212 463 224 468 224 479
+               C 224 490 210 494 198 491
+               C 186 488 176 492 177 501
+               C 178 510 192 513 204 510
+               C 214 508 222 511 224 518"
+            fill="none" stroke="#F2A38B" stroke-width="16"/>
+      <path d="M200 440
+               C 180 440 170 448 172 458
+               C 174 468 188 470 198 467
+               C 212 463 224 468 224 479
+               C 224 490 210 494 198 491
+               C 186 488 176 492 177 501
+               C 178 510 192 513 204 510
+               C 214 508 222 511 224 518"
+            fill="none" stroke="#D67B62" stroke-width="2.2" stroke-dasharray="1.5 9" opacity="0.85"/>
+    </g>
+
+    <!-- ===== BLADDER ===== -->
+    <path d="M200 523 q-15 2 -15 13 q0 12 15 12 q15 0 15 -12 q0 -11 -15 -13 z"
+          fill="#F6D07C" stroke="#D7A74C" stroke-width="2.2"/>
+  </g>
+
+</svg>

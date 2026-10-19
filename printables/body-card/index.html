@@ -23,14 +23,26 @@
 </header>
 
 <main>
+  <!-- ============ اختيار المجموعة ============ -->
+  <nav class="tabs" aria-label="اختيار المجموعة">
+    <button class="tab" data-set="boy" aria-pressed="false">
+      <span class="tab-title">وليد</span>
+      <span class="tab-sub">٦ سنوات</span>
+    </button>
+    <button class="tab is-active" data-set="girl" aria-pressed="true">
+      <span class="tab-title">نور</span>
+      <span class="tab-sub">سنتان • مجموعة القص والتركيب</span>
+    </button>
+  </nav>
+
   <!-- ============ تجربة تفاعلية ============ -->
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">جرّبها الآن</span>
       <h2>اضغط البطاقة لتقلبها</h2>
       <p>
-        الوجه الأول يُظهر <b>وليد</b> من الخارج، وعند قلبها يظهر
-        <b>هيكله العظمي</b> في المكان نفسه — تمامًا كالورقة المطبوعة.
+        الوجه الأول يُظهر <b>نور</b> من الخارج، وعند قلبها يظهر
+        <b>هيكلها العظمي</b> في المكان نفسه — تمامًا كالورقة المطبوعة.
       </p>
       <ul class="checks">
         <li>نفس المقاس ونفس الوضعية في الوجهين</li>
@@ -42,8 +54,8 @@
     <div class="flip-wrap">
       <div class="flip" id="flip" role="button" tabindex="0" aria-label="اقلب البطاقة">
         <div class="flip-inner">
-          <div class="flip-face front" data-svg="assets/boy.svg"></div>
-          <div class="flip-face back" data-svg="assets/skeleton.svg"></div>
+          <div class="flip-face front" data-svg="assets/girl.svg"></div>
+          <div class="flip-face back" data-svg="assets/girl-skeleton.svg"></div>
         </div>
       </div>
       <p class="hint" id="flip-hint">الوجه الأول: من الخارج</p>
@@ -51,37 +63,96 @@
   </section>
 
   <!-- ============ الصفحات للطباعة ============ -->
-  <section class="sheets" id="sheets">
-    <article class="sheet-card">
-      <div class="sheet-head">
-        <div>
-          <h3>صفحة ١ — البطاقة</h3>
-          <p>وجهان على ورقة A4 واحدة</p>
+  <section class="group" data-set="girl">
+    <h3 class="group-title">مجموعة نور (سنتان) — ٤ صفحات اقصص وركّب</h3>
+    <div class="sheets" id="sheets-girl">
+      <article class="sheet-card">
+        <div class="sheet-head">
+          <div>
+            <h3>١ — البطاقة</h3>
+            <p>وجهان: نور من الخارج / هيكلها من الداخل</p>
+          </div>
+          <a class="btn ghost sm" href="assets/girl-card-a4.png" download>PNG</a>
         </div>
-        <a class="btn ghost sm" href="assets/card-a4.png" download>تنزيل PNG</a>
-      </div>
-      <div class="paper" data-svg="card-a4.svg"></div>
-    </article>
+        <div class="paper" data-svg="girl-card-a4.svg"></div>
+      </article>
 
-    <article class="sheet-card">
-      <div class="sheet-head">
-        <div>
-          <h3>صفحة ٢ — ورقة نشاط</h3>
-          <p>تسمية العظام + بنك كلمات + «هل تعلم؟»</p>
+      <article class="sheet-card">
+        <div class="sheet-head">
+          <div>
+            <h3>٢ — الأعضاء</h3>
+            <p>طبقة الأعضاء + مفتاح الأسماء (للورق الشفاف)</p>
+          </div>
+          <a class="btn ghost sm" href="assets/girl-organs-a4.png" download>PNG</a>
         </div>
-        <a class="btn ghost sm" href="assets/activity-a4.png" download>تنزيل PNG</a>
-      </div>
-      <div class="paper" data-svg="activity-a4.svg"></div>
-    </article>
+        <div class="paper" data-svg="girl-organs-a4.svg"></div>
+      </article>
+
+      <article class="sheet-card">
+        <div class="sheet-head">
+          <div>
+            <h3>٣ — بطاقات القص</h3>
+            <p>الرأس • اليد • الرجل — ثلاث بطاقات منفصلة</p>
+          </div>
+          <a class="btn ghost sm" href="assets/girl-parts-a4.png" download>PNG</a>
+        </div>
+        <div class="paper" data-svg="girl-parts-a4.svg"></div>
+      </article>
+
+      <article class="sheet-card">
+        <div class="sheet-head">
+          <div>
+            <h3>٤ — ورقة نشاط</h3>
+            <p>تسمية العظام + بنك كلمات + تلوين</p>
+          </div>
+          <a class="btn ghost sm" href="assets/girl-activity-a4.png" download>PNG</a>
+        </div>
+        <div class="paper" data-svg="girl-activity-a4.svg"></div>
+      </article>
+    </div>
   </section>
+
+  <section class="group" data-set="boy" hidden>
+    <h3 class="group-title">مجموعة وليد (٦ سنوات) — صفحتان</h3>
+    <div class="sheets" id="sheets-boy">
+      <article class="sheet-card">
+        <div class="sheet-head">
+          <div>
+            <h3>صفحة ١ — البطاقة</h3>
+            <p>وجهان على ورقة A4 واحدة</p>
+          </div>
+          <a class="btn ghost sm" href="assets/card-a4.png" download>PNG</a>
+        </div>
+        <div class="paper" data-svg="card-a4.svg"></div>
+      </article>
+
+      <article class="sheet-card">
+        <div class="sheet-head">
+          <div>
+            <h3>صفحة ٢ — ورقة نشاط</h3>
+            <p>تسمية العظام + بنك كلمات + «هل تعلم؟»</p>
+          </div>
+          <a class="btn ghost sm" href="assets/activity-a4.png" download>PNG</a>
+        </div>
+        <div class="paper" data-svg="activity-a4.svg"></div>
+      </article>
+    </div>
+  </section>
+
+  <p class="pdf-note">
+    نسخة PDF جاهزة للطباعة:
+    <a href="girl-set-print.pdf" download>مجموعة نور (٤ صفحات)</a> ·
+    <a href="body-card-print.pdf" download>مجموعة وليد (صفحتان)</a>
+  </p>
 
   <section class="howto">
     <h3>طريقة الطباعة</h3>
     <ol>
-      <li><b>اطبع</b> الصفحة الأولى على ورق A4 سميك (160–250 جرامًا) وبمقاس 100%.</li>
-      <li><b>اقطع</b> الصفحة من الخط المنقّط في المنتصف (رمز المقص) لتصبح بطاقتين.</li>
-      <li><b>الصق</b> الظهرين معًا (وليد + الهيكل) بحيث يتطابق الرسمان تمامًا.</li>
-      <li>أو اطوِ الورقة من المنتصف مباشرة إن لم ترغب في القص.</li>
+      <li><b>اطبع</b> الصفحات الأربع على ورق A4 بمقاس 100% (سميك للبطاقات).</li>
+      <li><b>اقصص</b> البطاقة من الخط المنقّط في منتصف الصفحة الأولى لتصبح وجهين.</li>
+      <li><b>الصق</b> الوجهين ظهرًا لظهر (نور + الهيكل) ليتطابق الرسمان تمامًا.</li>
+      <li><b>طبقة الأعضاء:</b> اطبعها على ورق شفاف وضعها فوق الهيكل.</li>
+      <li><b>بطاقات الأجزاء:</b> اقصص الرأس واليد والرجل من الإطار المنقّط.</li>
     </ol>
   </section>
 </main>

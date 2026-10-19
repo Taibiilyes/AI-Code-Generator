@@ -76,6 +76,27 @@ function wirePrint() {
   $("#btn-print")?.addEventListener("click", () => window.print());
 }
 
+/* ---------- تبديل المجموعة (وليد / نور) ---------- */
+function wireTabs() {
+  const tabs = [...document.querySelectorAll(".tab")];
+  const groups = [...document.querySelectorAll(".group")];
+  if (!tabs.length) return;
+
+  const select = (set) => {
+    tabs.forEach((t) => {
+      const on = t.dataset.set === set;
+      t.classList.toggle("is-active", on);
+      t.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    groups.forEach((g) => {
+      g.hidden = g.dataset.set !== set;
+    });
+  };
+
+  tabs.forEach((t) => t.addEventListener("click", () => select(t.dataset.set)));
+}
+
 document.querySelectorAll("[data-svg]").forEach(inlineSvg);
 wireFlip();
 wirePrint();
+wireTabs();
