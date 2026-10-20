@@ -20,9 +20,59 @@ db.init_db()
 file_manager.ensure_workspace()
 
 @app.route("/")
+@app.route("/id-card")
 def index():
-    """Renders the main IDE workspace dashboard."""
+    """Renders the Professional ID Card Maker Studio (برنامج صنع بطاقات التعريف الوظيفية)."""
+    return render_template("id_card_maker.html")
+
+@app.route("/ide")
+def ide_workspace():
+    """Renders the AI Code Generator IDE workspace dashboard."""
     return render_template("index.html")
+
+@app.route("/download-standalone")
+def download_standalone():
+    """Downloads the 100% self-contained single-file offline HTML program."""
+    standalone_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "برنامج_بطاقات_التعريف_الوظيفية_مستقل.html")
+    if os.path.exists(standalone_path):
+        return send_file(
+            standalone_path,
+            mimetype="text/html",
+            as_attachment=True,
+            download_name="برنامج_بطاقات_التعريف_الوظيفية.html"
+        )
+    return render_template("id_card_maker.html")
+
+@app.route("/api/cards", methods=["GET"])
+def list_id_cards():
+    """Lists all saved employee ID cards."""
+    try:
+        cards = db.get_id_cards()
+        return jsonify({"success": True, "cards": cards})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/api/cards", methods=["POST"])
+def save_id_card_route():
+    """Saves or updates an employee ID card."""
+    data = request.get_json() or {}
+    title = data.get("title", "بطاقة موظف").strip() or "بطاقة موظف"
+    card_data = data.get("card_data", {})
+    card_id = data.get("id")
+    try:
+        saved_id = db.save_id_card(title=title, card_data=card_data, card_id=card_id)
+        return jsonify({"success": True, "id": saved_id, "message": "تم حفظ البطاقة بنجاح."})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/api/cards/<int:card_id>", methods=["DELETE"])
+def delete_id_card_route(card_id):
+    """Deletes a saved employee ID card."""
+    try:
+        deleted = db.delete_id_card(card_id)
+        return jsonify({"success": deleted, "message": "تم حذف البطاقة بنجاح." if deleted else "البطاقة غير موجودة."})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 @app.route("/api/health", methods=["GET"])
 def health():

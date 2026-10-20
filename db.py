@@ -63,6 +63,17 @@ def init_db():
         )
     ''')
 
+    # Table for saved Professional ID Cards
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS id_cards (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            card_data TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
     conn.commit()
 
     # Seed initial built-in templates if table is empty
@@ -70,6 +81,12 @@ def init_db():
     count = cursor.fetchone()["count"]
     if count == 0:
         seed_default_snippets(conn)
+
+    # Seed initial default reference card if id_cards table is empty
+    cursor.execute("SELECT COUNT(*) as count FROM id_cards")
+    cards_count = cursor.fetchone()["count"]
+    if cards_count == 0:
+        seed_default_id_cards(conn)
 
     conn.close()
 
@@ -344,3 +361,113 @@ def clear_history():
     cursor.execute("DELETE FROM execution_logs")
     conn.commit()
     conn.close()
+
+
+def seed_default_id_cards(conn):
+    """Seeds the default SARL AL-AMINE GARD reference card and sample cards."""
+    cursor = conn.cursor()
+    default_card = {
+        "companyName": "SARL AL-AMINE GARD",
+        "companySubtitle": "Société de Gardiennage et d'Escort de Fonds et de Produits Sensibles",
+        "cardTitle": "CARTE PROFESSIONNELLE",
+        "logoMode": "vector",
+        "shieldArabic": "الأمين",
+        "shieldLine1": "AL-AMINE",
+        "shieldLine2": "GARD",
+        "shieldLeft": "PROTECTION",
+        "shieldRight": "SÉCURITÉ",
+        "shieldPrimaryColor": "#24333f",
+        "shieldAccentColor": "#59a1be",
+        "shieldInnerBg": "#c8e3ed",
+        "nom": "AISSAT",
+        "prenom": "ATMANE",
+        "matricule": "11 310",
+        "groupeSanguin": "O-",
+        "fonction": "A.P.S",
+        "dateExpiration": "10/04/2023",
+        "wilaya": "Tébessa",
+        "labelNom": "Nom:",
+        "labelPrenom": "Prénom:",
+        "labelMatricule": "Matricule:",
+        "labelGroupeSanguin": "Groupe sanguin:",
+        "labelFonction": "Fonction",
+        "labelDateExpiration": "Date d'expiration:",
+        "labelWilaya": "Wilaya:",
+        "extraFields": [],
+        "photoUrl": "/static/assets/card/default_photo.jpg",
+        "photoZoom": 1.0,
+        "photoOffsetX": 0,
+        "photoOffsetY": 0,
+        "showStamp": True,
+        "stampTopText": "SARL AL-AMINE GARD",
+        "stampBottomText": "GARDIENNAGE & ESCORTE",
+        "stampCenterText": "SÉCURITÉ",
+        "stampColor": "#cc3b42",
+        "stampOpacity": 0.16,
+        "stampX": 805,
+        "stampY": 455,
+        "stampAngle": -75,
+        "cardBgColor": "#f4f5f3",
+        "headerOutlineColor": "#377b9c",
+        "headerFillColor": "#f4f5f3",
+        "bannerBgColor": "#1c1f24",
+        "bannerTextColor": "#f0f4f7",
+        "labelColor": "#52667d",
+        "valueColor": "#22262c"
+    }
+    cursor.execute(
+        "INSERT INTO id_cards (title, card_data) VALUES (?, ?)",
+        ("AISSAT ATMANE — 11 310 (النموذج الأصلي)", json.dumps(default_card, ensure_ascii=False))
+    )
+    conn.commit()
+
+
+def get_id_cards():
+    """Retrieves all saved employee ID cards."""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, title, card_data, created_at, updated_at FROM id_cards ORDER BY id DESC")
+    rows = []
+    for row in cursor.fetchall():
+        d = dict(row)
+        try:
+            d["card_data"] = json.loads(d["card_data"])
+        except Exception:
+            d["card_data"] = {}
+        rows.append(d)
+    conn.close()
+    return rows
+
+
+def save_id_card(title, card_data, card_id=None):
+    """Saves or updates an employee ID card."""
+    conn = get_connection()
+    cursor = conn.cursor()
+    data_str = json.dumps(card_data, ensure_ascii=False) if isinstance(card_data, dict) else str(card_data)
+    if card_id:
+        cursor.execute(
+            "UPDATE id_cards SET title = ?, card_data = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+            (title, data_str, card_id)
+        )
+        saved_id = card_id
+    else:
+        cursor.execute(
+            "INSERT INTO id_cards (title, card_data) VALUES (?, ?)",
+            (title, data_str)
+        )
+        saved_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    return saved_id
+
+
+def delete_id_card(card_id):
+    """Deletes an employee ID card by ID."""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM id_cards WHERE id = ?", (card_id,))
+    deleted = cursor.rowcount > 0
+    conn.commit()
+    conn.close()
+    return deleted
+

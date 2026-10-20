@@ -38,6 +38,7 @@ class TestAICodeGenerator(unittest.TestCase):
         self.assertIn("Testing Python Execution: OK", result["stdout"])
         self.assertEqual(result["exit_code"], 0)
 
+    @unittest.skipUnless(shutil.which("javac"), "javac not installed in sandbox")
     def test_03_java_execution(self):
         """Test compiling and executing Java code in sandbox."""
         java_code = '''
@@ -51,6 +52,48 @@ class TestAICodeGenerator(unittest.TestCase):
         self.assertTrue(result["success"])
         self.assertIn("Testing Java Execution: OK", result["stdout"])
         self.assertEqual(result["exit_code"], 0)
+
+    def test_09_id_card_studio_and_api(self):
+        """Test ID Card Maker Studio page and /api/cards CRUD endpoints."""
+        page_resp = self.client.get("/")
+        self.assertEqual(page_resp.status_code, 200)
+        self.assertIn("برنامج صنع بطاقات التعريف الوظيفية", page_resp.get_data(as_text=True))
+
+        # Save a new ID card
+        new_card = {
+            "title": "BENALI KARIM — 22 450",
+            "card_data": {
+                "companyName": "SARL AL-AMINE GARD",
+                "nom": "BENALI",
+                "prenom": "KARIM",
+                "matricule": "22 450",
+                "groupeSanguin": "A+",
+                "fonction": "Chef de Poste",
+                "dateExpiration": "15/10/2027",
+                "wilaya": "M'Sila"
+            }
+        }
+        post_resp = self.client.post(
+            "/api/cards",
+            data=json.dumps(new_card),
+            content_type="application/json"
+        )
+        self.assertEqual(post_resp.status_code, 200)
+        post_data = post_resp.get_json()
+        self.assertTrue(post_data["success"])
+        card_id = post_data["id"]
+
+        # List saved cards
+        list_resp = self.client.get("/api/cards")
+        self.assertEqual(list_resp.status_code, 200)
+        list_data = list_resp.get_json()
+        self.assertTrue(list_data["success"])
+        self.assertTrue(any(c["id"] == card_id for c in list_data["cards"]))
+
+        # Delete the test card
+        del_resp = self.client.delete(f"/api/cards/{card_id}")
+        self.assertEqual(del_resp.status_code, 200)
+        self.assertTrue(del_resp.get_json()["success"])
 
     def test_04_ai_generation_offline(self):
         """Test smart AI code generation without API key."""
