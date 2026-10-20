@@ -33,13 +33,26 @@ def ide_workspace():
 @app.route("/download-standalone")
 def download_standalone():
     """Downloads the 100% self-contained single-file offline HTML program."""
-    standalone_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "برنامج_بطاقات_التعريف_الوظيفية_مستقل.html")
+    standalone_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "SSG_ID_Card_Maker.html")
     if os.path.exists(standalone_path):
         return send_file(
             standalone_path,
-            mimetype="text/html",
+            mimetype="application/octet-stream",
             as_attachment=True,
-            download_name="برنامج_بطاقات_التعريف_الوظيفية.html"
+            download_name="SSG_ID_Card_Maker.html"
+        )
+    return render_template("id_card_maker.html")
+
+@app.route("/download-app-zip")
+def download_app_zip():
+    """Downloads the standalone program inside a ZIP archive."""
+    zip_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "SSG_ID_Card_Maker.zip")
+    if os.path.exists(zip_path):
+        return send_file(
+            zip_path,
+            mimetype="application/zip",
+            as_attachment=True,
+            download_name="SSG_ID_Card_Maker.zip"
         )
     return render_template("id_card_maker.html")
 
