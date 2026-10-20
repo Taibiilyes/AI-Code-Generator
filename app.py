@@ -5,6 +5,8 @@ A full-stack AI-assisted development IDE for generating, executing, and applying
 
 import os
 import io
+import base64
+from PIL import Image
 from flask import Flask, render_template, request, jsonify, send_file
 import db
 import code_runner
@@ -55,6 +57,67 @@ def download_app_zip():
             download_name="SSG_ID_Card_Maker.zip"
         )
     return render_template("id_card_maker.html")
+
+@app.route("/api/export-pdf", methods=["POST"])
+def export_a4_pdf():
+    """Creates a 300-DPI multi-page A4 PDF from rendered A4 sheet images and returns a download link."""
+    data = request.get_json() or {}
+    pages_b64 = data.get("pages", [])
+    filename = data.get("filename", "Cartes_Professionnelles_A4.pdf")
+    safe_name = "".join(c for c in filename if c.isalnum() or c in ("_", "-", ".")).strip() or "Cartes_A4.pdf"
+    if not safe_name.lower().endswith(".pdf"):
+        safe_name += ".pdf"
+
+    if not pages_b64:
+        return jsonify({"success": False, "error": "لا توجد صفحات لتصديرها."}), 400
+
+    try:
+        pil_pages = []
+        for b64_str in pages_b64:
+            if "," in b64_str:
+                b64_str = b64_str.split(",", 1)[1]
+            raw = base64.b64decode(b64_str)
+            im = Image.open(io.BytesIO(raw)).convert("RGB")
+            pil_pages.append(im)
+
+        exports_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "exports")
+        os.makedirs(exports_dir, exist_ok=True)
+        out_path = os.path.join(exports_dir, safe_name)
+
+        first_page = pil_pages[0]
+        rest_pages = pil_pages[1:]
+        first_page.save(
+            out_path,
+            format="PDF",
+            resolution=300.0,
+            save_all=True,
+            append_images=rest_pages
+        )
+
+        return jsonify({
+            "success": True,
+            "filename": safe_name,
+            "download_url": f"/download-pdf/{safe_name}",
+            "pages_count": len(pil_pages)
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/download-pdf/<path:filename>", methods=["GET"])
+def download_pdf_file(filename):
+    """Serves a generated A4 PDF file for direct download or browser viewing."""
+    safe_name = os.path.basename(filename)
+    exports_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "exports")
+    file_path = os.path.join(exports_dir, safe_name)
+    if not os.path.exists(file_path):
+        return jsonify({"success": False, "error": "ملف PDF غير موجود."}), 404
+    as_attach = request.args.get("inline", "0") != "1"
+    return send_file(
+        file_path,
+        mimetype="application/pdf",
+        as_attachment=as_attach,
+        download_name=safe_name
+    )
 
 @app.route("/api/cards", methods=["GET"])
 def list_id_cards():

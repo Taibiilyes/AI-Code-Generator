@@ -95,6 +95,47 @@ class TestAICodeGenerator(unittest.TestCase):
         self.assertEqual(del_resp.status_code, 200)
         self.assertTrue(del_resp.get_json()["success"])
 
+    def test_10_blank_template_and_a4_pdf_export(self):
+        """Test clean blank default template, standalone downloads, and multi-page A4 PDF export."""
+        import base64
+        import io
+        from PIL import Image
+
+        page_html = self.client.get("/").get_data(as_text=True)
+        # Ensure previous personal info was wiped from default template inputs
+        self.assertNotIn('value="AISSAT"', page_html)
+        self.assertNotIn('value="ATMANE"', page_html)
+        self.assertNotIn('value="11 310"', page_html)
+        self.assertIn("S.S.G LILHIRASSA WA ELAMEN", page_html)
+
+        # Test multi-page 300-DPI A4 PDF export endpoint (Fronts + Backs)
+        buf = io.BytesIO()
+        Image.new("RGB", (600, 850), (255, 255, 255)).save(buf, format="JPEG")
+        b64_img = "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode("ascii")
+
+        pdf_resp = self.client.post(
+            "/api/export-pdf",
+            data=json.dumps({
+                "filename": "Test_SSG_A4_Batch.pdf",
+                "pages": [b64_img, b64_img]
+            }),
+            content_type="application/json"
+        )
+        self.assertEqual(pdf_resp.status_code, 200)
+        pdf_json = pdf_resp.get_json()
+        self.assertTrue(pdf_json["success"])
+        self.assertEqual(pdf_json["pages_count"], 2)
+
+        dl_resp = self.client.get(pdf_json["download_url"])
+        self.assertEqual(dl_resp.status_code, 200)
+        self.assertTrue(dl_resp.data.startswith(b"%PDF-"))
+
+        # Test standalone app downloads
+        st_resp = self.client.get("/download-standalone")
+        self.assertEqual(st_resp.status_code, 200)
+        zip_app_resp = self.client.get("/download-app-zip")
+        self.assertEqual(zip_app_resp.status_code, 200)
+
     def test_04_ai_generation_offline(self):
         """Test smart AI code generation without API key."""
         res_py = ai_engine.generate_ai_code("أنشئ خادم REST API", "python", "generate")

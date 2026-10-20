@@ -722,12 +722,22 @@ body.light-mode .section-box {
     opacity: 1;
 }
 
-/* Printable Area Styles (CR80 / A4 Sheet) */
+/* Printable Area Styles (Exact A4 Sheet / CR80) */
 #print-sheet-container {
     display: none;
 }
 
+@page {
+    size: A4;
+    margin: 0;
+}
+
 @media print {
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+    }
     body * {
         visibility: hidden;
     }
@@ -736,23 +746,26 @@ body.light-mode .section-box {
         visibility: visible;
     }
     #print-sheet-container {
-        display: flex !important;
-        flex-wrap: wrap;
-        gap: 6mm;
-        justify-content: center;
-        align-items: flex-start;
+        display: block !important;
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
-        padding: 8mm;
+        margin: 0 !important;
+        padding: 0 !important;
         background: #fff !important;
     }
-    .print-card-img {
-        width: 85.6mm !important;
-        height: 53.98mm !important;
-        object-fit: fill;
-        border: 0.25mm dashed #94a3b8;
-        page-break-inside: avoid;
+    .print-a4-page-img {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        page-break-after: always;
+        break-after: page;
+    }
+    .print-a4-page-img:last-child {
+        page-break-after: auto;
+        break-after: auto;
     }
 }

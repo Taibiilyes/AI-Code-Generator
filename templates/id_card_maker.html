@@ -21,30 +21,27 @@
         </div>
 
         <div class="header-toolbar">
-            <button class="btn btn-success" id="btn-download-png" title="تحميل البطاقة كصورة عالية الدقة PNG">
-                <i class="fa-solid fa-download"></i> <span>تحميل PNG عالي الدقة</span>
+            <button class="btn btn-danger" id="btn-top-export-pdf" style="background:linear-gradient(135deg,#e11d48,#be123c); color:#fff; border:none;" title="تصدير ورقة A4 كملف PDF جاهز للطباعة (أمامي / خلفي / شامل)">
+                <i class="fa-solid fa-file-pdf"></i> <span>تصدير PDF (ورقة A4)</span>
             </button>
-            <button class="btn btn-primary" id="btn-download-jpg" title="تحميل البطاقة بصيغة JPG">
-                <i class="fa-solid fa-file-image"></i> <span>تحميل JPG</span>
+            <button class="btn btn-indigo" id="btn-top-print-fronts" title="طباعة الأوجه الأمامية دفعة واحدة على ورقة A4">
+                <i class="fa-solid fa-print"></i> <span>طباعة الأوجه الأمامية (A4)</span>
             </button>
-            <button class="btn btn-indigo" id="btn-print-single" title="طباعة البطاقة بالحجم الحقيقي CR80">
-                <i class="fa-solid fa-print"></i> <span>طباعة البطاقة</span>
+            <button class="btn btn-indigo" id="btn-top-print-backs" style="background:linear-gradient(135deg,#4f46e5,#3730a3);" title="طباعة الأوجه الخلفية دفعة واحدة على ورقة A4">
+                <i class="fa-solid fa-print"></i> <span>طباعة الأوجه الخلفية (A4)</span>
             </button>
-            <button class="btn btn-outline" id="btn-print-a4" title="طباعة 8 نسخ من البطاقة الحالية في ورقة A4">
-                <i class="fa-solid fa-table-cells"></i> <span>طباعة A4 (8 بطاقات)</span>
+            <button class="btn btn-outline" id="btn-top-a4-settings" title="فتح إعدادات تنسيق ورقة A4 وعدد العمال">
+                <i class="fa-solid fa-sliders"></i> <span>تنسيق A4 والعمال</span>
             </button>
-            <button class="btn btn-outline" id="btn-print-all-saved" title="طباعة جميع بطاقات الموظفين المحفوظة في ورقة A4 واحدة">
-                <i class="fa-solid fa-users-viewfinder"></i> <span>طباعة كل الموظفين (A4)</span>
+            <button class="btn btn-success" id="btn-download-png" title="تحميل البطاقة المفردة كصورة عالية الدقة PNG">
+                <i class="fa-solid fa-download"></i> <span>صورة PNG</span>
             </button>
-            <button class="btn btn-outline" id="btn-save-card-db" title="حفظ البطاقة الحالية في السجل">
-                <i class="fa-solid fa-floppy-disk"></i> <span>حفظ البطاقة</span>
+            <button class="btn btn-outline" id="btn-save-card-db" title="حفظ البطاقة الحالية في قائمة العمال">
+                <i class="fa-solid fa-user-plus"></i> <span>إضافة للعاملين</span>
             </button>
             <a href="https://github.com/Taibiilyes/AI-Code-Generator/raw/arena/2f971dcd-ai-code-generator/SSG_ID_Card_Maker.zip" target="_blank" rel="noopener" class="btn btn-outline" title="تحميل البرنامج كملف مضغوط يعمل على أي جهاز بدون إنترنت">
-                <i class="fa-solid fa-laptop-file"></i> <span>تحميل البرنامج لجهازك (ZIP)</span>
+                <i class="fa-solid fa-laptop-file"></i> <span>تحميل البرنامج (ZIP)</span>
             </a>
-            <button class="btn btn-outline" id="btn-reset-default" title="استعادة بيانات النموذج الأصلي">
-                <i class="fa-solid fa-rotate-left"></i> <span>النموذج الأصلي</span>
-            </button>
             <button class="btn btn-outline" id="btn-theme-toggle" title="تبديل المظهر الفاتح/الداكن">
                 <i class="fa-solid fa-sun"></i>
             </button>
@@ -72,9 +69,9 @@
                     <i class="fa-solid fa-stamp"></i>
                     <span>الختم والتصميم</span>
                 </button>
-                <button class="tab-btn" data-tab="tab-saved">
-                    <i class="fa-solid fa-folder-open"></i>
-                    <span>السجل والطباعة</span>
+                <button class="tab-btn" data-tab="tab-saved" id="tab-btn-a4">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>طباعة A4 و PDF</span>
                 </button>
             </nav>
 
@@ -83,7 +80,10 @@
                 <div class="section-box">
                     <div class="section-title">
                         <span><i class="fa-solid fa-id-badge"></i> المعلومات الشخصية والوظيفية</span>
-                        <div style="display:flex; gap:0.3rem;">
+                        <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+                            <button type="button" class="btn btn-danger btn-sm" id="btn-clear-all-personal" title="مسح كافة المعلومات الشخصية والصورة الشخصية لإرجاع البطاقة فارغة">
+                                <i class="fa-solid fa-broom"></i> تفريغ الكل
+                            </button>
                             <button type="button" class="btn btn-outline btn-sm" id="btn-labels-fr" title="عناوين الحقول بالفرنسية كما في النموذج">Fr</button>
                             <button type="button" class="btn btn-outline btn-sm" id="btn-labels-ar" title="عناوين الحقول بالعربية">عربي</button>
                         </div>
@@ -92,24 +92,25 @@
                     <div class="form-grid-2">
                         <div>
                             <label class="form-label">اللقب (Nom)</label>
-                            <input type="text" id="inp-nom" class="form-input input-ltr" value="AISSAT" placeholder="مثال: AISSAT">
+                            <input type="text" id="inp-nom" class="form-input input-ltr" value="" placeholder="أدخل اللقب (Nom)">
                         </div>
                         <div>
                             <label class="form-label">الاسم (Prénom)</label>
-                            <input type="text" id="inp-prenom" class="form-input input-ltr" value="ATMANE" placeholder="مثال: ATMANE">
+                            <input type="text" id="inp-prenom" class="form-input input-ltr" value="" placeholder="أدخل الاسم (Prénom)">
                         </div>
                     </div>
 
                     <div class="form-grid-2">
                         <div>
                             <label class="form-label">رقم التسجيل (Matricule)</label>
-                            <input type="text" id="inp-matricule" class="form-input input-ltr" value="11 310" placeholder="مثال: 11 310">
+                            <input type="text" id="inp-matricule" class="form-input input-ltr" value="" placeholder="أدخل رقم التسجيل">
                         </div>
                         <div>
                             <label class="form-label">فصيلة الدم (Groupe sanguin)</label>
                             <div style="display:flex; gap:0.35rem;">
                                 <select id="sel-blood" class="form-select input-ltr" style="max-width:95px;">
-                                    <option value="O-" selected>O-</option>
+                                    <option value="" selected>— اختر —</option>
+                                    <option value="O-">O-</option>
                                     <option value="O+">O+</option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
@@ -118,7 +119,7 @@
                                     <option value="AB+">AB+</option>
                                     <option value="AB-">AB-</option>
                                 </select>
-                                <input type="text" id="inp-groupe-sanguin" class="form-input input-ltr" value="O-">
+                                <input type="text" id="inp-groupe-sanguin" class="form-input input-ltr" value="" placeholder="فصيلة الدم">
                             </div>
                         </div>
                     </div>
@@ -126,7 +127,7 @@
                     <div class="form-grid-2">
                         <div>
                             <label class="form-label">الوظيفة / المهنة (Fonction)</label>
-                            <input type="text" id="inp-fonction" list="fonctions-list" class="form-input input-ltr" value="A.P.S" placeholder="مثال: A.P.S">
+                            <input type="text" id="inp-fonction" list="fonctions-list" class="form-input input-ltr" value="" placeholder="أدخل الوظيفة (مثال: A.P.S)">
                             <datalist id="fonctions-list">
                                 <option value="A.P.S">Agent de Prévention et de Sécurité</option>
                                 <option value="Chef de Poste">Chef de Poste</option>
@@ -140,7 +141,7 @@
                         </div>
                         <div>
                             <label class="form-label">الولاية (Wilaya)</label>
-                            <input type="text" id="inp-wilaya" list="wilayas-list" class="form-input input-ltr" value="Tébessa" placeholder="مثال: Tébessa">
+                            <input type="text" id="inp-wilaya" list="wilayas-list" class="form-input input-ltr" value="" placeholder="أدخل الولاية">
                             <datalist id="wilayas-list">
                                 <option value="Adrar">01 - Adrar (أدرار)</option>
                                 <option value="Chlef">02 - Chlef (الشلف)</option>
@@ -213,7 +214,7 @@
                             </div>
                         </label>
                         <div style="display:grid; grid-template-columns: 1fr auto; gap:0.45rem;">
-                            <input type="text" id="inp-date-expiration" class="form-input input-ltr" value="10/04/2023" placeholder="DD/MM/YYYY">
+                            <input type="text" id="inp-date-expiration" class="form-input input-ltr" value="" placeholder="DD/MM/YYYY">
                             <input type="date" id="inp-date-picker" class="form-input" style="width:140px;">
                         </div>
                     </div>
@@ -288,8 +289,8 @@
                         <button type="button" class="btn btn-indigo btn-sm" id="btn-open-webcam">
                             <i class="fa-solid fa-camera"></i> الكاميرا
                         </button>
-                        <button type="button" class="btn btn-outline btn-sm" id="btn-photo-default">
-                            <i class="fa-solid fa-rotate-left"></i> صورة النموذج
+                        <button type="button" class="btn btn-danger btn-sm" id="btn-photo-default">
+                            <i class="fa-solid fa-eraser"></i> مسح الصورة (فارغ)
                         </button>
                         <button type="button" class="btn btn-outline btn-sm" id="btn-photo-avatar">
                             <i class="fa-solid fa-user-shield"></i> صورة رمزية
@@ -417,19 +418,19 @@
                     </div>
 
                     <div class="mode-pills">
-                        <button type="button" class="mode-pill active" data-logo-mode="vector">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> درع متجهي قابل للتعديل
+                        <button type="button" class="mode-pill active" data-logo-mode="extracted">
+                            <i class="fa-solid fa-certificate"></i> شعار SSG المحسّن (المدمج)
                         </button>
                         <button type="button" class="mode-pill" data-logo-mode="custom">
-                            <i class="fa-solid fa-upload"></i> رفع صورة شعار الشركة
+                            <i class="fa-solid fa-upload"></i> رفع صورة شعار آخر
                         </button>
-                        <button type="button" class="mode-pill" data-logo-mode="extracted">
-                            <i class="fa-solid fa-certificate"></i> الشعار المرجعي السابق
+                        <button type="button" class="mode-pill" data-logo-mode="vector">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> درع متجهي مخصص
                         </button>
                     </div>
 
                     <!-- Vector Shield Controls -->
-                    <div id="vector-shield-settings">
+                    <div id="vector-shield-settings" style="display:none;">
                         <div class="form-grid-3" style="grid-template-columns: 1fr 1fr 1fr;">
                             <div>
                                 <label class="form-label">الاسم بالعربية</label>
@@ -475,6 +476,52 @@
                                     <input type="color" id="clr-shield-inner" value="#c8e3ed">
                                     <span id="txt-shield-inner">#c8e3ed</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Original Company Shield Color & Border Controls -->
+                    <div id="extracted-logo-settings" style="margin-top:0.65rem; padding:0.65rem; border-radius:8px; background:rgba(14,165,233,0.06); border:1px solid rgba(14,165,233,0.2);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                            <span style="font-size:0.78rem; font-weight:800; color:var(--accent-primary);">
+                                <i class="fa-solid fa-sliders"></i> تحسين الألوان والحدود للشعار الأصلي (دون تغيير الرسم أو النصوص)
+                            </span>
+                            <button type="button" class="btn btn-outline btn-sm" id="btn-reset-logo-enhance" style="padding:0.15rem 0.45rem; font-size:0.72rem;">الضبط المحسّن</button>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div>
+                                <label class="form-label">عمق التباين وحدّة اللون</label>
+                                <div class="range-row">
+                                    <input type="range" id="rng-logo-contrast" min="80" max="145" step="1" value="100">
+                                    <span class="range-val" id="val-logo-contrast">100%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label">إشباع اللون الذهبي</label>
+                                <div class="range-row">
+                                    <input type="range" id="rng-logo-saturate" min="70" max="160" step="1" value="100">
+                                    <span class="range-val" id="val-logo-saturate">100%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div>
+                                <label class="form-label">السطوع</label>
+                                <div class="range-row">
+                                    <input type="range" id="rng-logo-bright" min="80" max="130" step="1" value="100">
+                                    <span class="range-val" id="val-logo-bright">100%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label">نمط حدود الشعار الخارجية</label>
+                                <select id="sel-logo-border" class="form-select">
+                                    <option value="clean" selected>حدود حادة نقية (مطابقة للأصل)</option>
+                                    <option value="gold-rim">إطار حدود ذهبي رفيع</option>
+                                    <option value="dark-rim">إطار حدود أسود حاد بارز</option>
+                                    <option value="soft-shadow">حدود حادة مع ظل ناعم</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -663,26 +710,183 @@
                 </div>
             </div>
 
-            <!-- TAB 5: Saved Cards & Print Options (السجل والطباعة) -->
+            <!-- TAB 5: A4 Batch Print, Layout Formatting & PDF Export (طباعة A4 و PDF) -->
             <div class="tab-pane" id="tab-saved">
-                <div class="section-box">
+                <!-- 1. Instant Batch Print & PDF Export Actions -->
+                <div class="section-box" style="border-color: var(--accent-primary);">
                     <div class="section-title">
-                        <span><i class="fa-solid fa-database"></i> سجل البطاقات المحفوظة</span>
-                        <button type="button" class="btn btn-primary btn-sm" id="btn-new-blank-card">
-                            <i class="fa-solid fa-user-plus"></i> موظف جديد
+                        <span><i class="fa-solid fa-file-pdf"></i> طباعة وتصدير PDF لورقة A4 (الأمامية والخلفية دفعة واحدة)</span>
+                    </div>
+
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.65rem;">
+                        اختر تصدير ملف <strong>PDF عالي الدقة (300 DPI)</strong> أو الطباعة المباشرة لورقة A4:
+                    </p>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.45rem; margin-bottom:0.55rem;">
+                        <button type="button" class="btn btn-danger btn-sm" id="btn-pdf-fronts" style="background:linear-gradient(135deg,#e11d48,#be123c); color:#fff; border:none; padding:0.55rem;">
+                            <i class="fa-solid fa-file-pdf"></i> PDF الأوجه الأمامية (دفعة)
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" id="btn-pdf-backs" style="background:linear-gradient(135deg,#9f1239,#881337); color:#fff; border:none; padding:0.55rem;">
+                            <i class="fa-solid fa-file-pdf"></i> PDF الأوجه الخلفية (دفعة)
                         </button>
                     </div>
-                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.75rem;">
-                        يمكنك حفظ عدة بطاقات لموظفي الشركة والرجوع إليها أو تعديلها وطباعتها في أي وقت:
-                    </p>
-                    <div id="saved-cards-list">
-                        <!-- Populated via JS -->
+
+                    <button type="button" class="btn btn-success btn-sm" id="btn-pdf-both" style="width:100%; margin-bottom:0.65rem; padding:0.58rem;">
+                        <i class="fa-solid fa-layer-group"></i> تصدير PDF شامل (صفحة الأوجه الأمامية + صفحة الأوجه الخلفية معاً)
+                    </button>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.45rem;">
+                        <button type="button" class="btn btn-indigo btn-sm" id="btn-batch-print-fronts" style="padding:0.5rem;">
+                            <i class="fa-solid fa-print"></i> طباعة الأوجه الأمامية A4
+                        </button>
+                        <button type="button" class="btn btn-indigo btn-sm" id="btn-batch-print-backs" style="background:linear-gradient(135deg,#4338ca,#312e81); padding:0.5rem;">
+                            <i class="fa-solid fa-print"></i> طباعة الأوجه الخلفية A4
+                        </button>
                     </div>
                 </div>
 
+                <!-- 2. A4 Sheet Layout, Worker Count & Millimeter Formatting -->
                 <div class="section-box">
                     <div class="section-title">
-                        <span><i class="fa-solid fa-file-export"></i> تصدير واستيراد بيانات البطاقة (JSON)</span>
+                        <span><i class="fa-solid fa-ruler-combined"></i> تنسيق وتعديل طباعة ورقة A4 وعدد العمال</span>
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-reset-a4-layout">الضبط القياسي</button>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">عدد البطاقات (العمال) في ورقة A4 الواحدة</label>
+                        <select id="sel-a4-preset" class="form-select">
+                            <option value="2x4" selected>8 عمال في ورقة A4 (2 عمود × 4 صفوف — قياسي 85.6×54 مم)</option>
+                            <option value="2x5">10 عمال في ورقة A4 (2 عمود × 5 صفوف — 85.6×48 مم)</option>
+                            <option value="2x3">6 عمال في ورقة A4 (2 عمود × 3 صفوف — 85.6×54 مم)</option>
+                            <option value="2x2">4 عمال في ورقة A4 (2 عمود × 2 صفوف)</option>
+                            <option value="1x2">عاملان في ورقة A4 (1 عمود × 2 صفوف)</option>
+                            <option value="1x1">عامل واحد في وسط ورقة A4 (1 × 1)</option>
+                            <option value="3x3">9 عمال في ورقة A4 أفقية (3 أعمدة × 3 صفوف)</option>
+                            <option value="custom">تخصيص يدوي حر للأعمدة والصفوف والمقاسات</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grid-3" style="grid-template-columns: 1fr 1fr 1.2fr;">
+                        <div>
+                            <label class="form-label">الأعمدة (Cols)</label>
+                            <input type="number" id="inp-a4-cols" class="form-input input-ltr" min="1" max="4" value="2">
+                        </div>
+                        <div>
+                            <label class="form-label">الصفوف (Rows)</label>
+                            <input type="number" id="inp-a4-rows" class="form-input input-ltr" min="1" max="6" value="4">
+                        </div>
+                        <div>
+                            <label class="form-label">اتجاه ورقة A4</label>
+                            <select id="sel-a4-orientation" class="form-select">
+                                <option value="portrait" selected>عمودي (210×297 مم)</option>
+                                <option value="landscape">أفقي (297×210 مم)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div>
+                            <label class="form-label">عرض البطاقة (مم mm)</label>
+                            <input type="number" id="inp-card-w-mm" class="form-input input-ltr" min="40" max="190" step="0.5" value="85.6">
+                        </div>
+                        <div>
+                            <label class="form-label">ارتفاع البطاقة (مم mm)</label>
+                            <input type="number" id="inp-card-h-mm" class="form-input input-ltr" min="30" max="140" step="0.5" value="54.0">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div>
+                            <label class="form-label">المسافة الأفقية بين البطاقات (مم)</label>
+                            <input type="number" id="inp-gap-x-mm" class="form-input input-ltr" min="0" max="30" step="0.5" value="6.0">
+                        </div>
+                        <div>
+                            <label class="form-label">المسافة العمودية بين البطاقات (مم)</label>
+                            <input type="number" id="inp-gap-y-mm" class="form-input input-ltr" min="0" max="30" step="0.5" value="6.0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label style="display:flex; align-items:center; gap:0.45rem; font-size:0.8rem; font-weight:700; cursor:pointer;">
+                            <input type="checkbox" id="chk-a4-autocenter" checked>
+                            <span>توسيط البطاقات تلقائياً في منتصف ورقة A4 (موصى به لمطابقة الوجهين)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-grid-2" id="manual-margins-box" style="display:none;">
+                        <div>
+                            <label class="form-label">الهامش الجانبي الأيسر (مم)</label>
+                            <input type="number" id="inp-margin-x-mm" class="form-input input-ltr" min="0" max="60" step="0.5" value="16.4">
+                        </div>
+                        <div>
+                            <label class="form-label">الهامش العلوي (مم)</label>
+                            <input type="number" id="inp-margin-y-mm" class="form-input input-ltr" min="0" max="60" step="0.5" value="31.5">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2" style="margin-top:0.35rem;">
+                        <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:700; cursor:pointer;">
+                            <input type="checkbox" id="chk-a4-cropmarks" checked>
+                            <span>إظهار علامات وخطوط القص</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:700; cursor:pointer;" title="يعكس ترتيب الأعمدة في صفحة الأوجه الخلفية بحيث يتطابق ظهر كل بطاقة مع وجهها عند قلب ورقة A4 في الطابعة">
+                            <input type="checkbox" id="chk-a4-duplex-mirror" checked>
+                            <span>محاذاة معكوسة للوجه الخلفي (Duplex)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-grid-2" style="margin-top:0.5rem;">
+                        <div>
+                            <label class="form-label">معايرة إزاحة الخلف أفقياً (مم)</label>
+                            <input type="number" id="inp-back-shift-x" class="form-input input-ltr" min="-15" max="15" step="0.5" value="0">
+                        </div>
+                        <div>
+                            <label class="form-label">معايرة إزاحة الخلف عمودياً (مم)</label>
+                            <input type="number" id="inp-back-shift-y" class="form-input input-ltr" min="-15" max="15" step="0.5" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Workers Batch Queue & Mode Selection -->
+                <div class="section-box">
+                    <div class="section-title">
+                        <span><i class="fa-solid fa-users-gear"></i> قائمة بطاقات العمال في ورقة A4</span>
+                        <span id="batch-total-badge" style="font-size:0.75rem; background:rgba(14,165,233,0.15); color:#38bdf8; padding:0.15rem 0.55rem; border-radius:99px;">8 بطاقات</span>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">طريقة تعبئة ورقة A4</label>
+                        <select id="sel-a4-batch-mode" class="form-select">
+                            <option value="saved_queue" selected>طباعة قائمة العمال المحفوظة أدناه (عدة عمال مختلفين)</option>
+                            <option value="repeat_current">تكرار البطاقة المعروضة حالياً بعدد محدد</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row" id="repeat-count-box" style="display:none;">
+                        <label class="form-label">عدد النسخ المطلوب طباعتها في الورقة</label>
+                        <input type="number" id="inp-repeat-count" class="form-input input-ltr" min="1" max="24" value="8">
+                    </div>
+
+                    <div id="workers-queue-controls">
+                        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.65rem;">
+                            <button type="button" class="btn btn-primary btn-sm" id="btn-add-current-to-queue">
+                                <i class="fa-solid fa-plus"></i> حفظ وإضافة العامل الحالي للقائمة
+                            </button>
+                            <button type="button" class="btn btn-outline btn-sm" id="btn-new-blank-card">
+                                <i class="fa-solid fa-user-plus"></i> إدخال عامل جديد
+                            </button>
+                        </div>
+
+                        <div id="saved-cards-list">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Project JSON Export/Import -->
+                <div class="section-box">
+                    <div class="section-title">
+                        <span><i class="fa-solid fa-file-export"></i> تصدير واستيراد بيانات المشروع (JSON)</span>
                     </div>
                     <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
                         <button type="button" class="btn btn-outline btn-sm" id="btn-export-json">
@@ -706,6 +910,12 @@
                     </button>
                     <button type="button" class="side-switch-btn" id="btn-view-back">
                         <i class="fa-solid fa-qrcode"></i> الوجه الخلفي (Verso)
+                    </button>
+                    <button type="button" class="side-switch-btn" id="btn-view-a4-front">
+                        <i class="fa-solid fa-table-cells-large"></i> ورقة A4 (الأوجه الأمامية)
+                    </button>
+                    <button type="button" class="side-switch-btn" id="btn-view-a4-back">
+                        <i class="fa-solid fa-table-cells"></i> ورقة A4 (الأوجه الخلفية)
                     </button>
                 </div>
 
@@ -789,6 +999,47 @@
                         <i class="fa-solid fa-download"></i> تنزيل مباشر
                     </a>
                     <button type="button" class="btn btn-outline" id="btn-close-save-modal-2">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- A4 PDF Export & Batch Print Modal -->
+    <div class="modal-backdrop" id="pdf-export-modal">
+        <div class="modal-card" style="max-width: 780px; max-height: 92vh; display:flex; flex-direction:column;">
+            <div class="modal-card-header">
+                <h3><i class="fa-solid fa-file-pdf" style="color:#f43f5e;"></i> تصدير ملف PDF وطباعة أوراق A4 (أمامي / خلفي)</h3>
+                <button type="button" class="btn btn-outline btn-sm" id="btn-close-pdf-modal">&times;</button>
+            </div>
+            <div class="modal-card-body" style="overflow-y:auto;">
+                <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.5rem; margin-bottom:1rem;">
+                    <button type="button" class="btn btn-danger btn-sm" id="btn-modal-pdf-fronts" style="background:linear-gradient(135deg,#e11d48,#be123c); color:#fff; border:none; padding:0.6rem;">
+                        <i class="fa-solid fa-file-pdf"></i> تصدير PDF الأوجه الأمامية
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" id="btn-modal-pdf-backs" style="background:linear-gradient(135deg,#9f1239,#881337); color:#fff; border:none; padding:0.6rem;">
+                        <i class="fa-solid fa-file-pdf"></i> تصدير PDF الأوجه الخلفية
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" id="btn-modal-pdf-both" style="padding:0.6rem;">
+                        <i class="fa-solid fa-layer-group"></i> تصدير PDF شامل (أمامي + خلفي)
+                    </button>
+                </div>
+
+                <div id="pdf-ready-banner" style="display:none; background:rgba(16,185,129,0.12); border:1px solid #10b981; border-radius:10px; padding:0.85rem; margin-bottom:1rem;">
+                    <p style="font-size:0.9rem; font-weight:800; color:#10b981; margin-bottom:0.5rem;">
+                        ✅ تم إنشاء ملف PDF بنجاح بدقة 300 DPI بمقاس A4 القياسي!
+                    </p>
+                    <div style="display:flex; justify-content:center; gap:0.6rem; flex-wrap:wrap;">
+                        <a id="pdf-server-download-link" href="#" target="_blank" rel="noopener" class="btn btn-success">
+                            <i class="fa-solid fa-file-arrow-down"></i> اضغط هنا لتحميل ملف PDF مباشرة
+                        </a>
+                        <a id="pdf-server-view-link" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+                            <i class="fa-solid fa-up-right-from-square"></i> فتح ملف PDF في نافذة جديدة للطباعة
+                        </a>
+                    </div>
+                </div>
+
+                <div id="pdf-pages-preview-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:0.85rem;">
+                    <!-- Rendered A4 page previews injected here -->
                 </div>
             </div>
         </div>

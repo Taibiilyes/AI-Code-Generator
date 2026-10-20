@@ -364,62 +364,8 @@ def clear_history():
 
 
 def seed_default_id_cards(conn):
-    """Seeds the default SARL AL-AMINE GARD reference card and sample cards."""
-    cursor = conn.cursor()
-    default_card = {
-        "companyName": "SARL AL-AMINE GARD",
-        "companySubtitle": "Société de Gardiennage et d'Escort de Fonds et de Produits Sensibles",
-        "cardTitle": "CARTE PROFESSIONNELLE",
-        "logoMode": "vector",
-        "shieldArabic": "الأمين",
-        "shieldLine1": "AL-AMINE",
-        "shieldLine2": "GARD",
-        "shieldLeft": "PROTECTION",
-        "shieldRight": "SÉCURITÉ",
-        "shieldPrimaryColor": "#24333f",
-        "shieldAccentColor": "#59a1be",
-        "shieldInnerBg": "#c8e3ed",
-        "nom": "AISSAT",
-        "prenom": "ATMANE",
-        "matricule": "11 310",
-        "groupeSanguin": "O-",
-        "fonction": "A.P.S",
-        "dateExpiration": "10/04/2023",
-        "wilaya": "Tébessa",
-        "labelNom": "Nom:",
-        "labelPrenom": "Prénom:",
-        "labelMatricule": "Matricule:",
-        "labelGroupeSanguin": "Groupe sanguin:",
-        "labelFonction": "Fonction",
-        "labelDateExpiration": "Date d'expiration:",
-        "labelWilaya": "Wilaya:",
-        "extraFields": [],
-        "photoUrl": "/static/assets/card/default_photo.jpg",
-        "photoZoom": 1.0,
-        "photoOffsetX": 0,
-        "photoOffsetY": 0,
-        "showStamp": True,
-        "stampTopText": "SARL AL-AMINE GARD",
-        "stampBottomText": "GARDIENNAGE & ESCORTE",
-        "stampCenterText": "SÉCURITÉ",
-        "stampColor": "#cc3b42",
-        "stampOpacity": 0.16,
-        "stampX": 805,
-        "stampY": 455,
-        "stampAngle": -75,
-        "cardBgColor": "#f4f5f3",
-        "headerOutlineColor": "#377b9c",
-        "headerFillColor": "#f4f5f3",
-        "bannerBgColor": "#1c1f24",
-        "bannerTextColor": "#f0f4f7",
-        "labelColor": "#52667d",
-        "valueColor": "#22262c"
-    }
-    cursor.execute(
-        "INSERT INTO id_cards (title, card_data) VALUES (?, ?)",
-        ("AISSAT ATMANE — 11 310 (النموذج الأصلي)", json.dumps(default_card, ensure_ascii=False))
-    )
-    conn.commit()
+    """Leaves the saved ID cards table clean and empty (no pre-filled personal data)."""
+    pass
 
 
 def get_id_cards():
