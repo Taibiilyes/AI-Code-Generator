@@ -4,6 +4,10 @@ A full-stack AI-assisted development IDE for generating, executing, and applying
 """
 
 import os
+import sys
+if os.path.isdir("/home/user/vendor_py") and "/home/user/vendor_py" not in sys.path:
+    sys.path.insert(0, "/home/user/vendor_py")
+
 import io
 import base64
 from PIL import Image
