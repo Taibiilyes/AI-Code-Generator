@@ -39,8 +39,8 @@
             <button class="btn btn-outline" id="btn-save-card-db" title="حفظ البطاقة الحالية في السجل">
                 <i class="fa-solid fa-floppy-disk"></i> <span>حفظ البطاقة</span>
             </button>
-            <a href="/download-standalone" target="_blank" download="SSG_ID_Card_Maker.html" class="btn btn-outline" title="تحميل البرنامج كملف واحد يعمل على أي جهاز بدون إنترنت">
-                <i class="fa-solid fa-laptop-file"></i> <span>تحميل البرنامج لجهازك</span>
+            <a href="https://github.com/Taibiilyes/AI-Code-Generator/raw/arena/2f971dcd-ai-code-generator/SSG_ID_Card_Maker.zip" target="_blank" rel="noopener" class="btn btn-outline" title="تحميل البرنامج كملف مضغوط يعمل على أي جهاز بدون إنترنت">
+                <i class="fa-solid fa-laptop-file"></i> <span>تحميل البرنامج لجهازك (ZIP)</span>
             </a>
             <button class="btn btn-outline" id="btn-reset-default" title="استعادة بيانات النموذج الأصلي">
                 <i class="fa-solid fa-rotate-left"></i> <span>النموذج الأصلي</span>
@@ -767,6 +767,28 @@
                         <i class="fa-solid fa-camera-retro"></i> التقاط الصورة
                     </button>
                     <button type="button" class="btn btn-outline" id="btn-cancel-webcam">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Save Preview Modal (Works even when iframe blocks automatic downloads) -->
+    <div class="modal-backdrop" id="save-image-modal">
+        <div class="modal-card" style="max-width: 680px;">
+            <div class="modal-card-header">
+                <h3><i class="fa-solid fa-download"></i> حفظ صورة البطاقة بجودة عالية</h3>
+                <button type="button" class="btn btn-outline btn-sm" id="btn-close-save-modal">&times;</button>
+            </div>
+            <div class="modal-card-body">
+                <p style="font-size:0.88rem; color:var(--text-primary); margin-bottom:0.75rem; font-weight:700;">
+                    💡 إذا لم يبدأ التنزيل التلقائي، اضغط مطولاً على الصورة أدناه (في الهاتف) أو بزر الفأرة الأيمن واختر <strong>"حفظ الصورة" (Save Image)</strong>:
+                </p>
+                <img id="exported-card-preview-img" src="" alt="Card Output" style="width:100%; border-radius:10px; border:2px solid var(--accent-primary); box-shadow:0 10px 25px rgba(0,0,0,0.4);">
+                <div style="margin-top:1rem; display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+                    <a id="direct-download-anchor" href="#" download="Carte_Professionnelle.png" class="btn btn-success">
+                        <i class="fa-solid fa-download"></i> تنزيل مباشر
+                    </a>
+                    <button type="button" class="btn btn-outline" id="btn-close-save-modal-2">إغلاق</button>
                 </div>
             </div>
         </div>

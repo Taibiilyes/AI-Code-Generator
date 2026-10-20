@@ -1353,22 +1353,44 @@
     // EXPORT (PNG / JPG / JSON) & PRINTING (SINGLE CR80 / 8-UP A4 SHEET)
     // =========================================================================
     function setupExportAndPrint() {
+        const saveModal = document.getElementById("save-image-modal");
+        const previewImg = document.getElementById("exported-card-preview-img");
+        const directAnchor = document.getElementById("direct-download-anchor");
+
+        const openSaveModal = (dataUrl, fileName) => {
+            if (previewImg) previewImg.src = dataUrl;
+            if (directAnchor) {
+                directAnchor.href = dataUrl;
+                directAnchor.download = fileName;
+            }
+            if (saveModal) saveModal.classList.add("open");
+        };
+
+        document.getElementById("btn-close-save-modal")?.addEventListener("click", () => saveModal?.classList.remove("open"));
+        document.getElementById("btn-close-save-modal-2")?.addEventListener("click", () => saveModal?.classList.remove("open"));
+
         document.getElementById("btn-download-png")?.addEventListener("click", () => {
-            const link = document.createElement("a");
             const cleanName = `${state.nom || "CARTE"}_${state.prenom || ""}_${state.matricule || ""}`.trim().replace(/\s+/g, "_");
-            link.download = `Carte_Professionnelle_${cleanName}.png`;
-            link.href = canvas.toDataURL("image/png");
+            const fileName = `Carte_Professionnelle_${cleanName}.png`;
+            const dataUrl = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            link.download = fileName;
+            link.href = dataUrl;
             link.click();
-            showToast("تم تحميل البطاقة بصيغة PNG عالية الدقة");
+            openSaveModal(dataUrl, fileName);
+            showToast("تم تجهيز البطاقة بصيغة PNG عالية الدقة");
         });
 
         document.getElementById("btn-download-jpg")?.addEventListener("click", () => {
-            const link = document.createElement("a");
             const cleanName = `${state.nom || "CARTE"}_${state.prenom || ""}_${state.matricule || ""}`.trim().replace(/\s+/g, "_");
-            link.download = `Carte_Professionnelle_${cleanName}.jpg`;
-            link.href = canvas.toDataURL("image/jpeg", 0.96);
+            const fileName = `Carte_Professionnelle_${cleanName}.jpg`;
+            const dataUrl = canvas.toDataURL("image/jpeg", 0.96);
+            const link = document.createElement("a");
+            link.download = fileName;
+            link.href = dataUrl;
             link.click();
-            showToast("تم تحميل البطاقة بصيغة JPG");
+            openSaveModal(dataUrl, fileName);
+            showToast("تم تجهيز البطاقة بصيغة JPG");
         });
 
         document.getElementById("btn-print-single")?.addEventListener("click", () => {
